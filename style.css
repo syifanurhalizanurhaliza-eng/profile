@@ -67,7 +67,55 @@ body {
     object-fit: cover;
     border-radius: 50% ;
     box-shadow: 0 16px 30px rgb(189, 32, 111);
-
-
 }
-    
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat (2, minmax(260px,1fr));
+    gap: 24pxl;
+}
+.card {
+    background:rgb(161, 41, 41);
+    border: 1px solid rgb(241, 173, 185);
+    border-radius: 22px;
+    box-shadow: 0 12px 28px rgb(114, 71, 153);
+}
+     
+.card h2{
+    margin-top: 0;
+    margin-bottom: 18px;
+    color:#1e293b;
+    font: size 1.5rem;
+}
+.hobby-list{
+ list-style: none;
+ padding: 0;
+ margin:0;
+ display: grid;
+ gap:12px;
+}
+ 
+.hobby-list li{
+    background: linear-gradient(135deg,#f5f3ff);
+    border-left: 4px solid #7c3ead;
+    padding: 12px 14px;
+    font-weight: 600;
+    color:#312e81;
+}
+.sosial-links{
+    display: flex;
+    flex-wrap: wrap;
+    gap:12px;
+}
+.sosial-links a{
+    text-decoration: none;
+    color:#1d4ed8;
+    background:#e0edff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition:transform 0.2s ease,box-shadow 0.2s ease;
+}
+.sosial-links a:hover{
+    transform: translate(-2px);
+    box-shadow: 0 10px 20px rgb(168, 102, 177);
+}
