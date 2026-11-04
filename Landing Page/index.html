@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Geprek Pak Budi - Pedasnya Nampol, Renyahnya Juara!</title>
+<style>
+  /* ============ RESET & BASE ============ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #2b2b2b;
+    line-height: 1.6;
+    background: #fff8e7;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  :root {
+    --primary: #d62828;
+    --secondary: #fcbf49;
+    --dark: #1a1a1a;
+    --light: #fff8e7;
+    --accent: #f77f00;
+    --shadow: 0 10px 30px rgba(214,40,40,.15);
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ============ NAVBAR ============ */
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 18px 0;
+    background: rgba(255,248,231,.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all .3s ease;
+  }
+  .navbar.scrolled {
+    padding: 12px 0;
+    background: rgba(255,248,231,.98);
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+  }
+  .nav-wrap {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--primary);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo span { font-size: 1.8rem; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a {
+    font-weight: 500; position: relative;
+    transition: color .3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -5px; left: 0;
+    width: 0; height: 2px; background: var(--primary);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--primary); }
+  .nav-links a:hover::after { width: 100%; }
+  .btn-cta {
+    background: var(--primary); color: #fff !important;
+    padding: 10px 22px; border-radius: 30px;
+    font-weight: 600; transition: all .3s;
+    box-shadow: 0 4px 15px rgba(214,40,40,.3);
+  }
+  .btn-cta:hover {
+    background: #9d0208; transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(214,40,40,.4);
+  }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none;
+  }
+  .hamburger span {
+    width: 25px; height: 3px; background: var(--dark);
+    transition: all .3s; border-radius: 2px;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, #fff8e7 0%, #ffe5b4 100%);
+    position: relative; overflow: hidden;
+    padding: 100px 0 60px;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(214,40,40,.15), transparent 70%);
+    top: -100px; right: -100px;
+  }
+  .hero::after {
+    content: '🌶️'; position: absolute;
+    font-size: 8rem; opacity: .08;
+    bottom: 5%; left: 5%;
+    transform: rotate(-20deg);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: center;
+  }
+  .hero-text h1 {
+    font-size: 3.5rem; line-height: 1.1;
+    color: var(--dark); margin-bottom: 20px;
+  }
+  .hero-text h1 span {
+    color: var(--primary);
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-text p {
+    font-size: 1.15rem; color: #555;
+    margin-bottom: 30px; max-width: 500px;
+  }
+  .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    padding: 14px 30px; border-radius: 30px;
+    font-weight: 600; cursor: pointer; border: none;
+    font-size: 1rem; transition: all .3s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary {
+    background: var(--primary); color: #fff;
+    box-shadow: 0 6px 20px rgba(214,40,40,.35);
+  }
+  .btn-primary:hover { background: #9d0208; transform: translateY(-3px); }
+  .btn-secondary {
+    background: transparent; color: var(--dark);
+    border: 2px solid var(--dark);
+  }
+  .btn-secondary:hover { background: var(--dark); color: #fff; }
+
+  .hero-image {
+    position: relative; text-align: center;
+    font-size: 16rem; line-height: 1;
+    animation: float 4s ease-in-out infinite;
+  }
+  .hero-image .chili {
+    position: absolute; font-size: 3rem;
+    animation: spin 8s linear infinite;
+  }
+  .hero-image .chili:nth-child(2) { top: 10%; right: 10%; animation-delay: 0s; }
+  .hero-image .chili:nth-child(3) { bottom: 20%; left: 5%; animation-delay: -2s; }
+  .hero-image .chili:nth-child(4) { top: 50%; right: 0; animation-delay: -4s; font-size: 2rem; }
+  .hero-image::after {
+    content: ''; position: absolute;
+    bottom: 5%; left: 50%; transform: translateX(-50%);
+    width: 70%; height: 30px; border-radius: 50%;
+    background: rgba(0,0,0,.15); filter: blur(10px);
+    z-index: -1;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(180deg) translateY(-10px); }
+    100% { transform: rotate(360deg) translateY(0); }
+  }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 40px;
+    padding-top: 30px; border-top: 1px solid rgba(0,0,0,.1);
+  }
+  .stat h3 { font-size: 2rem; color: var(--primary); }
+  .stat p { font-size: .9rem; color: #666; }
+
+  /* ============ SECTION COMMON ============ */
+  section { padding: 90px 0; }
+  .section-title { text-align: center; margin-bottom: 60px; }
+  .section-title small {
+    color: var(--primary); font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    font-size: .9rem;
+  }
+  .section-title h2 {
+    font-size: 2.5rem; margin-top: 10px;
+    color: var(--dark);
+  }
+  .section-title p {
+    max-width: 600px; margin: 15px auto 0;
+    color: #666;
+  }
+
+  /* ============ KEUNGGULAN ============ */
+  .keunggulan { background: #fff; }
+  .keunggulan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+  }
+  .keunggulan-card {
+    background: var(--light);
+    padding: 35px 25px; border-radius: 20px;
+    text-align: center; transition: all .4s;
+    border: 2px solid transparent;
+  }
+  .keunggulan-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--secondary);
+    box-shadow: var(--shadow);
+  }
+  .keunggulan-icon {
+    width: 70px; height: 70px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 20px;
+    color: #fff;
+  }
+  .keunggulan-card h3 { margin-bottom: 10px; color: var(--dark); }
+  .keunggulan-card p { color: #666; font-size: .95rem; }
+
+  /* ============ PRODUK ============ */
+  .produk { background: linear-gradient(180deg, #fff8e7 0%, #ffe5b4 100%); }
+  .produk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+  }
+  .produk-card {
+    background: #fff; border-radius: 20px;
+    overflow: hidden; transition: all .4s;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+    position: relative;
+  }
+  .produk-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(214,40,40,.15);
+  }
+  .produk-img {
+    height: 200px;
+    background: linear-gradient(135deg, #ffe5b4, #fcbf49);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem; position: relative;
+  }
+  .produk-badge {
+    position: absolute; top: 15px; right: 15px;
+    background: var(--primary); color: #fff;
+    padding: 5px 12px; border-radius: 20px;
+    font-size: .75rem; font-weight: 600;
+  }
+  .produk-badge.new { background: var(--accent); }
+  .produk-badge.hot { background: #9d0208; }
+  .produk-info { padding: 25px; }
+  .produk-info h3 { margin-bottom: 8px; color: var(--dark); }
+  .produk-info .desc { color: #777; font-size: .9rem; margin-bottom: 15px; }
+  .level-indicator {
+    display: flex; gap: 3px; margin-bottom: 15px;
+  }
+  .level-indicator .chili-small {
+    font-size: .9rem;
+  }
+  .level-indicator .chili-small.off { opacity: .25; }
+  .produk-footer {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .produk-price { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+  .produk-price small { font-size: .75rem; color: #999; font-weight: 400; }
+  .btn-add {
+    background: var(--dark); color: #fff;
+    border: none; padding: 8px 16px;
+    border-radius: 20px; cursor: pointer;
+    font-size: .85rem; transition: all .3s;
+  }
+  .btn-add:hover { background: var(--primary); }
+
+  /* ============ TESTIMONI ============ */
+  .testimoni { background: #fff; }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  .testi-card {
+    background: var(--light);
+    padding: 30px; border-radius: 20px;
+    position: relative; transition: all .3s;
+  }
+  .testi-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+  .testi-card::before {
+    content: '"'; position: absolute;
+    top: 10px; right: 25px;
+    font-size: 5rem; color: var(--secondary);
+    font-family: Georgia, serif; line-height: 1;
+    opacity: .5;
+  }
+  .testi-stars { color: var(--secondary); margin-bottom: 15px; font-size: 1.1rem; }
+  .testi-text { color: #555; margin-bottom: 20px; font-style: italic; }
+  .testi-user { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 700; font-size: 1.2rem;
+  }
+  .testi-user h4 { color: var(--dark); font-size: 1rem; }
+  .testi-user small { color: #888; }
+
+  /* ============ KONTAK ============ */
+  .kontak {
+    background: linear-gradient(135deg, var(--dark) 0%, #333 100%);
+    color: #fff;
+  }
+  .kontak .section-title h2 { color: #fff; }
+  .kontak .section-title p { color: #ccc; }
+  .kontak-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .kontak-info h3 { margin-bottom: 25px; color: var(--secondary); }
+  .kontak-item {
+    display: flex; gap: 15px; margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .kontak-item .icon {
+    width: 45px; height: 45px; border-radius: 12px;
+    background: rgba(252,191,73,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .kontak-item h4 { color: #fff; margin-bottom: 3px; }
+  .kontak-item p { color: #bbb; font-size: .95rem; }
+
+  .kontak-form {
+    background: rgba(255,255,255,.05);
+    padding: 35px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; margin-bottom: 6px;
+    font-size: .9rem; color: #ddd;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 15px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 10px; color: #fff;
+    font-family: inherit; font-size: .95rem;
+    transition: all .3s;
+  }
+  .form-group select option { background: var(--dark); color: #fff; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--secondary);
+    background: rgba(255,255,255,.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group .error { color: #ff6b6b; font-size: .8rem; margin-top: 5px; display: none; }
+  .form-group.invalid .error { display: block; }
+  .form-group.invalid input, .form-group.invalid select, .form-group.invalid textarea { border-color: #ff6b6b; }
+  .btn-submit {
+    width: 100%; padding: 14px;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 10px;
+    font-weight: 600; cursor: pointer;
+    font-size: 1rem; transition: all .3s;
+  }
+  .btn-submit:hover { background: #9d0208; }
+  .form-success {
+    display: none; padding: 15px;
+    background: rgba(46,204,113,.15);
+    border: 1px solid #2ecc71;
+    border-radius: 10px; color: #2ecc71;
+    text-align: center; margin-top: 15px;
+  }
+  .form-success.show { display: block; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #0f0f0f; color: #aaa;
+    padding: 50px 0 20px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 40px;
+  }
+  .footer-col h4 {
+    color: #fff; margin-bottom: 18px;
+    font-size: 1.1rem;
+  }
+  .footer-col p { font-size: .9rem; line-height: 1.7; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a {
+    font-size: .9rem; transition: color .3s;
+  }
+  .footer-col ul li a:hover { color: var(--secondary); }
+  .social-links { display: flex; gap: 12px; margin-top: 15px; }
+  .social-links a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    display: flex; align-items: center; justify-content: center;
+    transition: all .3s; font-size: 1rem;
+  }
+  .social-links a:hover {
+    background: var(--primary); color: #fff;
+    transform: translateY(-3px);
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 20px; text-align: center;
+    font-size: .85rem;
+  }
+  .footer-bottom span { color: var(--primary); }
+
+  /* ============ ANIMATIONS ============ */
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: all .8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .hero-grid, .kontak-grid { grid-template-columns: 1fr; }
+    .hero-text h1 { font-size: 2.5rem; }
+    .hero-image { font-size: 11rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links {
+      position: fixed; top: 70px; right: -100%;
+      flex-direction: column; background: #fff;
+      width: 70%; height: 100vh;
+      padding: 40px 30px; gap: 20px;
+      box-shadow: -5px 0 20px rgba(0,0,0,.1);
+      transition: right .4s ease;
+    }
+    .nav-links.active { right: 0; }
+    .hamburger { display: flex; }
+    .section-title h2 { font-size: 2rem; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; }
+  }
+  @media (max-width: 500px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-text h1 { font-size: 2rem; }
+    .hero-image { font-size: 8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-wrap">
+    <a href="#home" class="logo"><span>🍗</span> Geprek Pak Budi</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#keunggulan">Keunggulan</a></li>
+      <li><a href="#produk">Menu</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+      <li><a href="#kontak" class="btn-cta">Pesan Sekarang</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-text fade-in">
+      <h1>Ayam Geprek <span>Pedasnya Nampol,</span> Renyahnya Juara!</h1>
+      <p>Nikmati sensasi ayam geprek dengan sambal bawang segar yang diulek langsung, tepung crispy renyah, dan level pedas sesuai selera. Dijamin bikin nagih!</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="document.getElementById('produk').scrollIntoView()">🍗 Lihat Menu</button>
+        <button class="btn-secondary" onclick="document.getElementById('kontak').scrollIntoView()">📞 Pesan Sekarang</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><h3>15K+</h3><p>Porsi Terjual</p></div>
+        <div class="stat"><h3>4.9★</h3><p>Rating Google</p></div>
+        <div class="stat"><h3>10</h3><p>Level Pedas</p></div>
+      </div>
+    </div>
+    <div class="hero-image fade-in">
+      🍗
+      <span class="chili">🌶️</span>
+      <span class="chili">🌶️</span>
+      <span class="chili">🌶️</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEUNGGULAN ============ -->
+<section class="keunggulan" id="keunggulan">
+  <div class="container">
+    <div class="section-title fade-in">
+      <small>Kenapa Harus Kami</small>
+      <h2>Keunggulan Geprek Pak Budi</h2>
+      <p>Kami berkomitmen menghadirkan ayam geprek terbaik dengan bahan berkualitas dan cita rasa yang konsisten.</p>
+    </div>
+    <div class="keunggulan-grid">
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">🐔</div>
+        <h3>Ayam Segar Pilihan</h3>
+        <p>Menggunakan ayam broiler segar setiap hari, tidak pakai ayam beku.</p>
+      </div>
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">🌶️</div>
+        <h3>Sambal Ulek Segar</h3>
+        <p>Sambal diulek langsung setiap pesanan, bukan sambal instan.</p>
+      </div>
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">🔥</div>
+        <h3>10 Level Pedas</h3>
+        <p>Pilih level pedas sesuai selera, dari level 1 sampai level 10 menantang!</p>
+      </div>
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">✅</div>
+        <h3>Halal & Higienis</h3>
+        <p>Tersertifikasi halal MUI dan diproduksi dengan standar kebersihan tinggi.</p>
+      </div>
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">💰</div>
+        <h3>Harga Merakyat</h3>
+        <p>Porsi besar dengan harga bersahabat, cocok untuk kantong pelajar.</p>
+      </div>
+      <div class="keunggulan-card fade-in">
+        <div class="keunggulan-icon">🚚</div>
+        <h3>Gratis Ongkir</h3>
+        <p>Free ongkir untuk radius 3 km dengan minimum pemesanan tertentu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUK ============ -->
+<section class="produk" id="produk">
+  <div class="container">
+    <div class="section-title fade-in">
+      <small>Menu Andalan</small>
+      <h2>Pilihan Ayam Geprek Kami</h2>
+      <p>Berbagai varian geprek dengan sambal khas yang siap memanjakan lidah Anda.</p>
+    </div>
+    <div class="produk-grid">
+      <div class="produk-card fade-in">
+        <div class="produk-img">🍗<span class="produk-badge hot">Best Seller</span></div>
+        <div class="produk-info">
+          <h3>Geprek Sambal Bawang</h3>
+          <p class="desc">Geprek klasik dengan sambal bawang putih yang gurih pedas mantap.</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 18.000 <small>/porsi</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+      <div class="produk-card fade-in">
+        <div class="produk-img">🧀<span class="produk-badge">Favorit</span></div>
+        <div class="produk-info">
+          <h3>Geprek Mozzarella</h3>
+          <p class="desc">Geprek dengan lelehan keju mozzarella yang creamy dan gurih.</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 25.000 <small>/porsi</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+      <div class="produk-card fade-in">
+        <div class="produk-img">🌿<span class="produk-badge new">New</span></div>
+        <div class="produk-info">
+          <h3>Geprek Sambal Matah</h3>
+          <p class="desc">Perpaduan ayam crispy dengan sambal matah Bali yang segar.</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 22.000 <small>/porsi</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+      <div class="produk-card fade-in">
+        <div class="produk-img">🥬</div>
+        <div class="produk-info">
+          <h3>Geprek Sambal Ijo</h3>
+          <p class="desc">Sambal hijau khas Padang dengan cita rasa pedas segar unik.</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 20.000 <small>/porsi</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+      <div class="produk-card fade-in">
+        <div class="produk-img">🔥<span class="produk-badge hot">Extreme</span></div>
+        <div class="produk-info">
+          <h3>Geprek Setan Level 10</h3>
+          <p class="desc">Tantangan pedas maksimal dengan cabai rawit merah pilihan!</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 23.000 <small>/porsi</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+      <div class="produk-card fade-in">
+        <div class="produk-img">🍚</div>
+        <div class="produk-info">
+          <h3>Paket Hemat Nasi + Geprek</h3>
+          <p class="desc">Nasi putih hangat + geprek sambal bawang + es teh manis.</p>
+          <div class="level-indicator">
+            <span class="chili-small">🌶️</span><span class="chili-small">🌶️</span>
+            <span class="chili-small">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+            <span class="chili-small off">🌶️</span><span class="chili-small off">🌶️</span>
+          </div>
+          <div class="produk-footer">
+            <div class="produk-price">Rp 22.000 <small>/paket</small></div>
+            <button class="btn-add">+ Pesan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONI ============ -->
+<section class="testimoni" id="testimoni">
+  <div class="container">
+    <div class="section-title fade-in">
+      <small>Testimoni Pelanggan</small>
+      <h2>Kata Mereka Tentang Kami</h2>
+      <p>Ribuan pelanggan telah mencoba kelezatan geprek kami. Berikut cerita mereka.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Gila sih ini geprek terenak yang pernah gue coba! Level 7 aja udah bikin keringetan tapi nagih. Sambalnya beneran fresh!"</p>
+        <div class="testi-user">
+          <div class="testi-avatar">RP</div>
+          <div><h4>Rizky Pratama</h4><small>Mahasiswa</small></div>
+        </div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Geprek mozarella-nya juara! Keju lumer banget, ayamnya crispy. Anak saya yang nggak doyan pedas aja suka. Recommended!"</p>
+        <div class="testi-user">
+          <div class="testi-avatar">DS</div>
+          <div><h4>Dewi Sartika</h4><small>Ibu Rumah Tangga</small></div>
+        </div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Paket hematnya worth it banget! Nasi + geprek + es teh cuma 22rb. Porsinya gede, sambalnya bisa request. Langganan tiap minggu."</p>
+        <div class="testi-user">
+          <div class="testi-avatar">AF</div>
+          <div><h4>Ahmad Fauzi</h4><small>Karyawan Swasta</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAK ============ -->
+<section class="kontak" id="kontak">
+  <div class="container">
+    <div class="section-title fade-in">
+      <small>Hubungi Kami</small>
+      <h2>Pesan Geprek Sekarang!</h2>
+      <p>Isi form di bawah atau hubungi kami langsung via WhatsApp. Kami siap antar ke lokasi Anda!</p>
+    </div>
+    <div class="kontak-grid">
+      <div class="kontak-info fade-in">
+        <h3>Informasi Kontak</h3>
+        <div class="kontak-item">
+          <div class="icon">📍</div>
+          <div><h4>Alamat</h4><p>Jl. Merdeka No. 88, Yogyakarta</p></div>
+        </div>
+        <div class="kontak-item">
+          <div class="icon">📱</div>
+          <div><h4>WhatsApp</h4><p>+62 813-9876-5432</p></div>
+        </div>
+        <div class="kontak-item">
+          <div class="icon">✉️</div>
+          <div><h4>Email</h4><p>order@geprekpakbudi.com</p></div>
+        </div>
+        <div class="kontak-item">
+          <div class="icon">🕐</div>
+          <div><h4>Jam Operasional</h4><p>Senin - Minggu: 10.00 - 23.00 WIB</p></div>
+        </div>
+        <div class="kontak-item">
+          <div class="icon">🛵</div>
+          <div><h4>Delivery</h4><p>Tersedia di GoFood, GrabFood, & ShopeeFood</p></div>
+        </div>
+      </div>
+
+      <form class="kontak-form fade-in" id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="nama">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+          <span class="error">Nama wajib diisi (min. 3 karakter)</span>
+        </div>
+        <div class="form-group">
+          <label for="hp">No. WhatsApp</label>
+          <input type="tel" id="hp" name="hp" placeholder="08xxxxxxxxxx" required>
+          <span class="error">Nomor WhatsApp tidak valid</span>
+        </div>
+        <div class="form-group">
+          <label for="menu">Pilih Menu</label>
+          <select id="menu" name="menu" required>
+            <option value="">-- Pilih Menu --</option>
+            <option value="Geprek Sambal Bawang">Geprek Sambal Bawang</option>
+            <option value="Geprek Mozzarella">Geprek Mozzarella</option>
+            <option value="Geprek Sambal Matah">Geprek Sambal Matah</option>
+            <option value="Geprek Sambal Ijo">Geprek Sambal Ijo</option>
+            <option value="Geprek Setan Level 10">Geprek Setan Level 10</option>
+            <option value="Paket Hemat">Paket Hemat Nasi + Geprek</option>
+          </select>
+          <span class="error">Pilih menu terlebih dahulu</span>
+        </div>
+        <div class="form-group">
+          <label for="pesan">Detail Pesanan / Catatan</label>
+          <textarea id="pesan" name="pesan" placeholder="Contoh: Level pedas 5, 2 porsi, alamat antar..." required></textarea>
+          <span class="error">Detail pesanan wajib diisi</span>
+        </div>
+        <button type="submit" class="btn-submit">Kirim Pesanan 🚀</button>
+        <div class="form-success" id="formSuccess">
+          ✅ Pesanan Anda berhasil dikirim! Kami akan segera menghubungi via WhatsApp.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>🍗 Geprek Pak Budi</h4>
+        <p>Ayam geprek dengan sambal ulek segar dan level pedas sesuai selera. Halal, higienis, dan selalu fresh sejak 2018.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#home">Beranda</a></li>
+          <li><a href="#keunggulan">Keunggulan</a></li>
+          <li><a href="#produk">Menu</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Layanan</h4>
+        <ul>
+          <li><a href="#">Pesan Antar</a></li>
+          <li><a href="#">Catering Acara</a></li>
+          <li><a href="#">Reseller</a></li>
+          <li><a href="#">Franchise</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul>
+          <li>📍 Jl. Merdeka No. 88, Yogya</li>
+          <li>📱 +62 813-9876-5432</li>
+          <li>✉️ order@geprekpakbudi.com</li>
+          <li>🕐 10.00 - 23.00 WIB</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span>Geprek Pak Budi</span>. All Rights Reserved. Dibuat dengan 🌶️ di Yogyakarta.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== NAVBAR SCROLL EFFECT =====
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ===== HAMBURGER MENU =====
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // ===== FADE-IN ON SCROLL =====
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ===== FORM VALIDATION =====
+  const form = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const nama = document.getElementById('nama');
+    const hp = document.getElementById('hp');
+    const menu = document.getElementById('menu');
+    const pesan = document.getElementById('pesan');
+
+    [nama, hp, menu, pesan].forEach(f => f.parentElement.classList.remove('invalid'));
+
+    if (nama.value.trim().length < 3) {
+      nama.parentElement.classList.add('invalid');
+      valid = false;
+    }
+    if (!/^(\+62|62|0)8[1-9][0-9]{7,11}$/.test(hp.value.trim())) {
+      hp.parentElement.classList.add('invalid');
+      valid = false;
+    }
+    if (!menu.value) {
+      menu.parentElement.classList.add('invalid');
+      valid = false;
+    }
+    if (pesan.value.trim().length < 5) {
+      pesan.parentElement.classList.add('invalid');
+      valid = false;
+    }
+
+    if (valid) {
+      formSuccess.classList.add('show');
+      form.reset();
+      setTimeout(() => formSuccess.classList.remove('show'), 5000);
+    }
+  });
+
+  // ===== TOMBOL PESAN PRODUK =====
+  document.querySelectorAll('.btn-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.produk-card');
+      const namaProduk = card.querySelector('h3').textContent;
+      document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const menuSelect = document.getElementById('menu');
+        for (let option of menuSelect.options) {
+          if (namaProduk.includes(option.text) || option.text.includes(namaProduk.split(' ')[1])) {
+            menuSelect.value = option.value;
+            break;
+          }
+        }
+        document.getElementById('pesan').value = `Halo, saya ingin memesan ${namaProduk}. Mohon info lebih lanjut.`;
+        document.getElementById('pesan').focus();
+      }, 600);
+    });
+  });
+</script>
+
+</body>
+</html>
