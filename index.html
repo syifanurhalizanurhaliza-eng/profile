@@ -1,167 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Profile</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile saya</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+  <body class="page">
+    <header class="hero">
+      <div class="profile-content">
+        <span class="badge">Web Profile</span>
+        <h1 id="text1" class="judul judul-besar">Syifa nurhaliza</h1>
+        <p id="text2" class="judul">
+          Saya seorang siswa MAN 3 Tulungagung yang sedang belajar Rekayasa
+          Perangkat Lunak (RPL)
+        </p>
+      </div>
+      <img class="profile-photo" src="" alt="photo profile" />
+    </header>
 
-<body>
-    <div class="page">
-        <header class="hero">
-            <div class="profile-content">
-                <span class="badge">web profile</span>
-                <h1 id="text1" class="judul-besar">syifa nurhaliza</h1>
-                <p id="text2"class="judul"> saya seorang siswa MAN 3 Tulungagung yang sedang belajar rekayasa perangkat lunak (RPL)
+    <main class="content-grid">
+      <section class="card">
+        <h2>Hobi</h2>
+        <ul class="hobby-list">
+          <li>Berenang</li>
+          <li>Badminton</li>
+        </ul>
+      </section>
 
-                </p>
-                <img src="burger.jfif" alt="photo profile" class="profile-photo" />
-        </header>
+      <section class="card">
+        <h2>Media Sosial</h2>
+        <div class="social-links">
+          <a href="#"> Youtube </a>
+          <a href="syfaaa.hlza">Instagram</a>
+          <a href="syfaa.nhlza">Tiktok</a>
+        </div>
+      </section>
 
-<main class="content-grid">
+      <section class="card form-card">
+        <h2>Kontak</h2>
+        <form>
+          <div class="field-group">
+            <label>Nama:</label>
+            <input type="text" placeholder="Masukkan nama anda!" />
+          </div>
+          <div class="field-group">
+            <label>Pesan</label>
+            <textarea rows="4" placeholder="Masukkan pesan anda!"></textarea>
+          </div>
+          <button type="submit">Kirim Pesan</button>
+        </form>
+      </section>
 
-
-
-
-        <section class="card">
-            <h2>Hobi</h2>
-            <ul class="hobby-list">
-                <li>badmintoon</li>
-                <li>liburan
-            </ul>
-        </section>
-        <section>
-            <h2>cita-cita</h2>
-            <ul>
-                <li>bosmuda</li>
-            </ul>
-        </section>
-        <section class="card">
-
-            <h2>media sosial</h2>
-            <div class="sosial links">
-                <a href="#"
-
-                <a href="sipauuuuuullll">instgram</a>
-                <a href="sipaaaaaaa">tiktok</a>
-        </section>
-        <section>
-            <form>
-                <label>nama:</label>
-                <input type="text" placeholder="masukan nama anda!">
-                <label>pesan</label>
-                <input type="text" placeholder="masukan pesan anda!" />
-                <button type="submit">kirim pesan</button>
-            </form>
-        </section>
-
-        <!--jadwal pelajarn-->
-        <table border>
-            <thead>
-                <tr>
-                    <th>hari</th>
-                    <th>mata pelajaran</th>
-                </tr>
-                <!--jadwal pelajaran-->
-            </thead>
-            <tbody>
-                <tr>
-
-                    <td rowspan="6">senin</td>
-                    <td>sosiologi</td>
-                </tr>
-                <tr>
-                    <td>bahasa inggris</td>
-
-                </tr>
-                <tr>
-                    <td>biologi</td>
-                </tr>
-                <tr>
-                    <td>ski</td>
-                </tr>
-                <tr>
-                    <td>informatika</td>
-                </tr>
-                <tr>
-                    <td>akidah akhlak</td>
-                </tr>
-                <tr>
-                    <td rowspan="6">selasa</td>
-                    <td>penjas</td>
-                </tr>
-                <tr>
-                    <td>kimia</td>
-                </tr>
-                <tr>
-                    <td>mtk</td>
-                </tr>
-                <tr>
-                    <td>sejarah</td>
-                </tr>
-                <tr>
-                    <td>pancasila</td>
-                </tr>
-                <tr>
-                    <td>bahasa indonesia</td>
-                </tr>
-                <tr>
-                    <td rowspan="4">rabu</td>
-
-
-                    <td>al quran hadits</td>
-                </tr>
-                <tr>
-                    <td>mtk tka</td>
-                </tr>
-                <tr>
-                    <td>bahsa arab</td>
-                </tr>
-                <tr>
-                    <td>rpl</td>
-                </tr>
-                <tr>
-                    <td rowspan="5">kamis</td>
-                </tr>
-                <tr>
-                    <td>fiqih</td>
-                </tr>
-                <tr>
-                    <td>fisika</td>
-                </tr>
-                <tr>
-                    <td>ekonomi</td>
-                </tr>
-                <tr>
-                    <td>bahasa arab</td>
-                </tr>
-                <tr>
-                    <td rowspan="5">jumat</td>
-                    <td>geografi</td>
-                </tr>
-                <tr>
-                    <td>koding</td>
-                </tr>
-                <tr>
-                    <td>bahasa indonesia</td>
-                </tr>
-                <tr>
-                    <td>seni budaya</td>
-                </tr>
-                <tr>
-                    <td>b inggris</td>
-                </tr>
-
-
-
-
-            </tbody>
+      <section class="card schedule-card">
+        <h2>Jadwal Pelajaran</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Hari</th>
+              <th>Mata Pelajaran</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3">Senin</td>
+              <td>Matematika</td>
+            </tr>
+            <tr>
+              <td>Bahasa Inggris</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td rowspan="2">Selasa</td>
+              <td>Matematika</td>
+            </tr>
+            <tr>
+              <td>Bahasa Inggris</td>
+            </tr>
+            <tr>
+              <td rowspan="3">Rabu</td>
+              <td>Bahasa Jawa</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td rowspan="3">Kamis</td>
+              <td>Bahasa Jawa</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td rowspan="4">Jumat</td>
+              <td>Bahasa Jawa</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+            <tr>
+              <td>Bahasa Indonesia</td>
+            </tr>
+          </tbody>
         </table>
-
-
-
-</body>
-
+      </section>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 Syifa nurhaliza. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
+
